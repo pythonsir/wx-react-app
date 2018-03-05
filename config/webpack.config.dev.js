@@ -142,18 +142,22 @@ module.exports = {
             test: /\.(js|jsx|mjs)$/,
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
-            // options: {
-            //   // This is a feature of `babel-loader` for webpack (not Babel itself).
-            //   // It enables caching results in ./node_modules/.cache/babel-loader/
-            //   // directory for faster rebuilds.
-            //   cacheDirectory: true,
-            // },
-            query:{
-              plugins: [["import", {
-                "libraryName": "antd",
-                "style": 'css',   // or 'css'
-              }]]
-            }
+            options: {
+              babelrc:true,
+              presets: [require.resolve('babel-preset-react-app')],
+              // This is a feature of `babel-loader` for webpack (not Babel itself).
+              // It enables caching results in ./node_modules/.cache/babel-loader/
+              // directory for faster rebuilds.
+              cacheDirectory: true,
+            },
+            // query:{
+            //   plugins: [["import", 
+            //   {
+            //     "libraryName": "antd-mobile",
+            //     "style":"css",
+            //   },
+            // ]]
+            // }
           },
           {
             test:/\.less$/,
@@ -171,10 +175,28 @@ module.exports = {
           },
           {
             test: /\.css$/,
-            include:/node_modules/,
+            include:/(node_modules|antd|antd-mobile)/,
             use:[
               require.resolve('style-loader'),
-              require.resolve('css-loader')
+              require.resolve('css-loader'),
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  ident: 'postcss',
+                  plugins: () => [
+                    require('postcss-flexbugs-fixes'),
+                    autoprefixer({
+                      browsers: [
+                        '>1%',
+                        'last 4 versions',
+                        'Firefox ESR',
+                        'not ie < 9', // React doesn't support IE8 anyway
+                      ],
+                      flexbox: 'no-2009',
+                    }),
+                  ],
+                },
+              },
             ]
           },
     
@@ -185,7 +207,7 @@ module.exports = {
           // in development "style" loader enables hot editing of CSS.
           {
             test: /\.css$/,
-            include: /src/,
+            include: path.appSrc,
             use: [
               require.resolve('style-loader'),
               {
@@ -193,13 +215,12 @@ module.exports = {
                 options: {
                   modules: true,
                   importLoaders: 1,
+                  localIdentName: '[local]___[hash:base64:5]',
                 },
               },
               {
                 loader: require.resolve('postcss-loader'),
                 options: {
-                  // Necessary for external CSS imports to work
-                  // https://github.com/facebookincubator/create-react-app/issues/2677
                   ident: 'postcss',
                   plugins: () => [
                     require('postcss-flexbugs-fixes'),

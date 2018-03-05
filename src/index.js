@@ -9,13 +9,11 @@ import {
   routerMiddleware,
   push
 } from 'react-router-redux'
-import 'ant-design-pro/dist/ant-design-pro.css';
-
 import createHistory from 'history/createBrowserHistory'
 import { Route, Switch } from 'react-router'
 import { Redirect } from 'react-router-dom'
 import reducer from './redux'
-
+import 'ant-design-pro/dist/ant-design-pro.css'; 
 import App from './App'
 
 import  rootSaga from './saga'

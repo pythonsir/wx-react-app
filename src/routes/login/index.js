@@ -1,4 +1,6 @@
 import React ,{Component} from 'react'
+
+
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import { Icon } from 'antd';
@@ -162,5 +164,6 @@ export default  connect(({login})=>{
     
 
 })(LoginPage)
+
 
 
