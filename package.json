@@ -65,9 +65,9 @@
     "react-app-rewired": "^1.4.1"
   },
   "scripts": {
-    "start": "node ./scripts/start.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom"
+    "start": "node scripts/start.js",
+    "build": "node scripts/build.js",
+    "test": "rnode scripts/test.js --env=jsdom"
   },
   "jest": {
     "collectCoverageFrom": [
