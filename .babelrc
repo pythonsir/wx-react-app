@@ -1,11 +1,12 @@
 {
-
-    "plugins": [["import", 
-    {
-        "libraryName": "antd",
-        "style": "css" 
-    }
-    ]]
+    "plugins": [
+    
+        ["import", 
+            {
+                "libraryName": "antd",
+                "style": "css" 
+            }
+         ]]
 
 
 }

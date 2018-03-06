@@ -1,13 +1,9 @@
 'use strict';
-import { combineReducers } from 'redux';
-
 
 const initstate={
 
-  notice: '',
-  type: 'tab1',
-  autoLogin: true,
-  submitting:false
+ status:undefined,
+ submitting:false,
 
 }
 
@@ -16,14 +12,20 @@ function login(state = initstate, {type,payload}) {
     
     switch (type) {
       case 'commonlogin':
-      console.log(payload)
         return {
           ...state,
-          ...payload
+          status:payload.status,
+          type:payload.type,
+          submitting:payload.status == 'error'?false:true,
         }
       case 'mobilelogin':
 
         return state
+      case 'loading':
+      return {
+        ...initstate,
+        submitting:true
+      }
       default:
         return state
     }

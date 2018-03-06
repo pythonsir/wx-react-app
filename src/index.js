@@ -1,45 +1,43 @@
+import 'babel-polyfill'
 import React from 'react'
 import { render } from 'react-dom'
-import { createStore, applyMiddleware, combineReducers,compose } from 'redux'
 import { connect, Provider } from 'react-redux'
-import createSagaMiddleware from 'redux-saga'
-import {
-  ConnectedRouter,
-  routerReducer,
-  routerMiddleware,
-  push
-} from 'react-router-redux'
-import createHistory from 'history/createBrowserHistory'
+import store ,{history} from './store'
+import { ConnectedRouter } from 'react-router-redux'
 import { Route, Switch } from 'react-router'
-import { Redirect } from 'react-router-dom'
-import reducer from './redux'
+
+import { getRouterData } from './common/router';
+
 import 'ant-design-pro/dist/ant-design-pro.css'; 
-import App from './App'
 
-import  rootSaga from './saga'
 
-const history = createHistory()
+import RenderAuthorized from 'ant-design-pro/lib/Authorized';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const sagaMiddleware = createSagaMiddleware()
+const Authorized = RenderAuthorized('');
 
-const middlewares = [ routerMiddleware(history),sagaMiddleware];
+const { AuthorizedRoute } = Authorized;
 
-const store = createStore(
-  reducer,
-  composeEnhancers(applyMiddleware(...middlewares))
-)
+const routerData = getRouterData();
 
-sagaMiddleware.run(rootSaga)
+const UserLayout = routerData['/user'].component;
 
-export {store};
+
 
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Switch>
-      <App />
+      <Route 
+            path="/user"
+            component={UserLayout}
+          />
+      <AuthorizedRoute
+            path="/"
+            render={props => <div>....</div>}
+            authority={['admin', 'user']}
+            redirectPath="/user/login"
+          />
       </Switch>
     </ConnectedRouter>
   </Provider>,

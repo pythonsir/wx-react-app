@@ -5,12 +5,13 @@ import {
 } from 'react-router-redux'
 
 import login from './login'
-
+import global from './global'
 
 
 const config = {
   routerReducer,
   login,
+  global,
 
 }
 

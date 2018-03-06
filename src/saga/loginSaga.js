@@ -3,24 +3,29 @@ import { push } from 'react-router-redux'
 import {login} from '../services/api'
 
 
- function* test({payload}){
+ function* logincheck({payload}){
 
   const response = yield call(login, payload);
 
   yield put({
     type:'commonlogin',
     payload:{
-      response
+      ...response,
     },
   })
 
-  yield put(push("/home"))
+  if(response.status === 'ok'){
+
+    yield put(push("/home"))
+
+  }
+
 
 }
 
  function* loginSaga() {
 
-    yield takeEvery('getToken', test)
+    yield takeEvery('getToken', logincheck)
 
   }
 
