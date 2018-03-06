@@ -5,11 +5,23 @@ import  data from '../mock/loginMock'
 
 export async function login(param) {
 
-    console.log( param);
+   const {username,password,type} = param;
+   
     
     return axios.get('/login').then(function(response){
 
-            return response.data
+                    if(username === 'admin' && password === '123456'){
+                        return {
+                            status:'ok',
+                            type:type,
+                        }
+                    }else{
+                        return {
+                            status:'error',
+                            type:type,
+                        }
+                    }
+            
     
         })
     

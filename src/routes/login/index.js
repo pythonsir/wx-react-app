@@ -33,66 +33,56 @@ const links = [{
 
 class LoginPage extends Component{
 
-  constructor(props){
-
-    super(props);
-    this.state={
-        notice: this.props.notice,
-        type: this.props.type,
-        autoLogin: this.props.autoLogin,
-        submitting:this.props.submitting
-    }
+  state = {
+    type: 'account',
+    autoLogin: true,
   }
 
-      onSubmit = (err, values) => {
-
-       
-        console.log('value collected ->', { ...values, autoLogin: this.state.autoLogin });
-        if (this.state.type === 'tab1') {
-          this.setState({
-            notice: '',
-          }, () => {
-              if(!err){
-
-                this.setState({
-                  submitting:true
-                })
-
-                setTimeout(() => {
-                  
-                  this.props.dispatch({
-                    type:'getToken',
-                    payload:{
-                      ...values
-                    }
-  
-                  })
-
-                }, 1500);
-
-               
 
 
+  onTabChange = (key) => {
+    this.setState({
+      type: key,
+    });
+  }
+
+  onSubmit = (err, values) => {
+
+        const { type } = this.state;
+
+        this.props.dispatch({
+          type:'loading'
+        })
+
+        if (!err) {
+          setTimeout(() => {
+            
+            this.props.dispatch({
+              type:'getToken',
+              payload:{
+                ...values,
+                type,
               }
+  
+            })
 
+          }, 1200);
+         
 
-          });
         }
         
       }
-      onTabChange = (key) => {
-        this.setState({
-          type: key,
-        });
-      }
+     
       changeAutoLogin = (e) => {
         this.setState({
           autoLogin: e.target.checked,
         });
       }
       render() {
-        return (
 
+        const {login} = this.props;
+
+        return (
             <DocumentTitle title={'登录'}>
             <div className={styles.container}>
               <div className={styles.content}>
@@ -112,15 +102,21 @@ class LoginPage extends Component{
             onTabChange={this.onTabChange}
             onSubmit={this.onSubmit}
           >
-            <Tab key="tab1" tab="账号密码登录">
+            <Tab key="account" tab="账号密码登录">
               {
-                this.state.notice &&
-                <Alert style={{ marginBottom: 24 }} message={this.state.notice} type="error" showIcon closable />
+                login.status === 'error' &&
+                login.type === 'account' &&
+                <Alert style={{ marginBottom: 24 }} message={'账号密码错误'} type="error" showIcon closable />
               }
               <UserName name="username" />
               <Password name="password" />
             </Tab>
-            <Tab key="tab2" tab="手机号登录">
+            <Tab key="mobile" tab="手机号登录">
+            {
+                login.status === 'error' &&
+                login.type === 'account' &&
+                <Alert style={{ marginBottom: 24 }} message={'账号密码错误'} type="error" showIcon closable />
+              }
               <Mobile name="mobile" />
               <Captcha onGetCaptcha={() => console.log('Get captcha!')} name="captcha" />
             </Tab>
@@ -128,7 +124,7 @@ class LoginPage extends Component{
               <Checkbox checked={this.state.autoLogin} onChange={this.changeAutoLogin}>自动登录</Checkbox>
               <a style={{ float: 'right' }} href="">忘记密码</a>
             </div>
-            <Submit loading={this.state.submitting}>登录</Submit>
+            <Submit loading={login.submitting}>登录</Submit>
             <div>
               其他登录方式
               <span className="icon icon-alipay" />
@@ -158,9 +154,11 @@ class LoginPage extends Component{
 
 export default  connect(({login})=>{
 
+
     return {
-        ...login
-    }
+        login,
+
+       }
     
 
 })(LoginPage)
