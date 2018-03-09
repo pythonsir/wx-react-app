@@ -8,13 +8,10 @@ import { Route, Switch } from 'react-router'
 
 import { getRouterData } from './common/router';
 
+import Authorized from './utils/Authorized';
+
 import 'ant-design-pro/dist/ant-design-pro.css'; 
 
-
-import RenderAuthorized from 'ant-design-pro/lib/Authorized';
-
-
-const Authorized = RenderAuthorized('');
 
 const { AuthorizedRoute } = Authorized;
 
