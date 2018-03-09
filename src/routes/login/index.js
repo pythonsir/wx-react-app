@@ -36,11 +36,13 @@ class LoginPage extends Component{
 
         const { type } = this.state;
 
+
+        if (!err) {
+
         this.props.dispatch({
           type:'loading'
         })
 
-        if (!err) {
           setTimeout(() => {
             
             this.props.dispatch({
