@@ -1,6 +1,6 @@
 import { notification } from 'antd';
 import axios from 'axios'
-import store from '../index'
+import store from '../store'
 import {push} from 'react-router-redux'
 
 
@@ -36,6 +36,8 @@ const codeMessage = {
     error.response = response;
     throw error;
   }
+
+
 
   /**
  * Requests a URL, returning a promise.

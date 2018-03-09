@@ -1,11 +1,13 @@
 import { put,takeEvery,call } from 'redux-saga/effects'
 import { push } from 'react-router-redux'
 import {login} from '../services/api'
-
+import { reloadAuthorized } from '../utils/Authorized';
 
  function* logincheck({payload}){
 
   const response = yield call(login, payload);
+
+  console.log(response);
 
   yield put({
     type:'commonlogin',
@@ -15,6 +17,8 @@ import {login} from '../services/api'
   })
 
   if(response.status === 'ok'){
+
+    reloadAuthorized();
 
     yield put(push("/home"))
 

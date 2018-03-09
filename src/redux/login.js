@@ -1,4 +1,5 @@
 'use strict';
+import { setAuthority } from '../utils/authority';
 
 const initstate={
 
@@ -7,17 +8,25 @@ const initstate={
 
 }
 
+function commonlogin(state,type,payload){
+
+  setAuthority(payload.currentAuthority);
+  
+  return {
+    ...state,
+    status:payload.status,
+    type:payload.type,
+    submitting:payload.status == 'error'?false:true,
+  }
+
+}
+
 
 function login(state = initstate, {type,payload}) {
     
     switch (type) {
       case 'commonlogin':
-        return {
-          ...state,
-          status:payload.status,
-          type:payload.type,
-          submitting:payload.status == 'error'?false:true,
-        }
+        return commonlogin(state,type,payload)
       case 'mobilelogin':
 
         return state

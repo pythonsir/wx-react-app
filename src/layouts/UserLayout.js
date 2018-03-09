@@ -2,12 +2,14 @@ import React from 'react';
 
 import DocumentTitle from 'react-document-title';
 import { Icon } from 'antd';
+import Authorized from '../utils/Authorized';
 import {Switch,Link,Route,Redirect} from 'react-router-dom'
 import GlobalFooter from 'ant-design-pro/lib/GlobalFooter';
 import { getRoutes } from '../utils/utils';
 import styles from './UserLayout.less';
 import logo from '../assets/logo.svg';
 import LoginPage from '../routes/login/index'
+import { getAuthority } from '../utils/authority';
 
 
 const links = [{
@@ -25,6 +27,8 @@ const links = [{
 }];
 
 const copyright = <div>Copyright <Icon type="copyright" /> 2018 蚂蚁金服体验技术部出品</div>;
+
+const { AuthorizedRoute } = Authorized;
 
 class UserLayout extends React.PureComponent {
   
@@ -55,8 +59,19 @@ class UserLayout extends React.PureComponent {
             </div>
             <Switch>
                     
-              {getRoutes(match.path, routerData).map(item =>
+              { getRoutes(match.path, routerData).map(item =>
                 (
+                  
+
+                  // <AuthorizedRoute
+                  //     key={item.key}
+                  //     path={item.path}
+                  //     component={item.component}
+                  //     exact={item.exact}
+                  //     authority={item.authority}
+                  //     redirectPath="/exception/403"
+                  //   />
+
                   <Route
                     key={item.key}
                     path={item.path}

@@ -83,8 +83,8 @@ class LoginPage extends Component{
                 login.type === 'account' &&
                 <Alert style={{ marginBottom: 24 }} message={'账号密码错误'} type="error" showIcon closable />
               }
-              <UserName name="username" />
-              <Password name="password" />
+              <UserName name="username" placeholder="admin/user"  />
+              <Password name="password" placeholder="888888/123456" />
             </Tab>
             <Tab key="mobile" tab="手机号登录">
             {
@@ -92,7 +92,7 @@ class LoginPage extends Component{
                 login.type === 'mobile' &&
                 <Alert style={{ marginBottom: 24 }} message={'账号密码错误'} type="error" showIcon closable />
               }
-              <Mobile name="mobile" />
+              <Mobile name="mobile"  />
               <Captcha onGetCaptcha={() => console.log('Get captcha!')} name="captcha" />
             </Tab>
             <div>

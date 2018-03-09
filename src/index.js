@@ -17,6 +17,8 @@ const { AuthorizedRoute } = Authorized;
 
 const routerData = getRouterData();
 
+const BaseLayout = routerData['/'].component
+
 const UserLayout = routerData['/user'].component;
 
 
@@ -31,7 +33,7 @@ render(
           />
       <AuthorizedRoute
             path="/"
-            render={props => <div>....</div>}
+            render={props => <BaseLayout />}
             authority={['admin', 'user']}
             redirectPath="/user/login"
           />

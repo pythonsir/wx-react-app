@@ -4,6 +4,7 @@ import pathToRegexp from 'path-to-regexp';
 
 import LoginPage from '../routes/login/index'
 import Main from '../routes/home/index'
+import BasicLayout from '../layouts/BaseLayout'
 import User from '../routes/user/index'
 import UserLayout from '../layouts/UserLayout'
 
@@ -29,13 +30,14 @@ export const getRouterData = () => {
     const routerConfig = {
 
         "/":{
-            component: Main
+            component: BasicLayout,
         },
         "/user":{
-            component:UserLayout 
+            component:UserLayout, 
         },
         "/user/login":{
-            component:LoginPage 
+            component:LoginPage,
+            authority:'guest',
         },
 
 
