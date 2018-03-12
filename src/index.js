@@ -4,7 +4,7 @@ import { render } from 'react-dom'
 import { connect, Provider } from 'react-redux'
 import store ,{history} from './store'
 import { ConnectedRouter } from 'react-router-redux'
-import { Route, Switch } from 'react-router'
+import { Route, Switch } from 'react-router-dom'
 
 import { getRouterData } from './common/router';
 
@@ -27,16 +27,16 @@ render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Switch>
-      <Route 
-            path="/user"
-            component={UserLayout}
-          />
-      <AuthorizedRoute
-            path="/"
-            render={props => <BaseLayout />}
-            authority={['admin', 'user']}
-            redirectPath="/user/login"
-          />
+        <Route 
+              path="/user"
+              component={UserLayout}
+            />
+        <AuthorizedRoute
+              path="/"
+              render={props => <BaseLayout />}
+              authority={['admin', 'user']}
+              redirectPath="/user/login"
+            />
       </Switch>
     </ConnectedRouter>
   </Provider>,

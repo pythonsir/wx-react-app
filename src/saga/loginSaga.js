@@ -1,5 +1,5 @@
 import { put,takeEvery,call } from 'redux-saga/effects'
-import { push } from 'react-router-redux'
+import { push,replace } from 'react-router-redux'
 import {login} from '../services/api'
 import { reloadAuthorized } from '../utils/Authorized';
 
@@ -20,7 +20,7 @@ import { reloadAuthorized } from '../utils/Authorized';
 
     reloadAuthorized();
 
-    yield put(push("/home"))
+    yield put(push("/"))
 
   }
 
