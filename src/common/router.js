@@ -7,6 +7,8 @@ import Main from '../routes/home/index'
 import BasicLayout from '../layouts/BaseLayout'
 import User from '../routes/user/index'
 import UserLayout from '../layouts/UserLayout'
+import Analysis  from '../routes/Dashboard/Analysis'
+import Monitor  from '../routes/Dashboard/Monitor'
 
 
 let routerDataCache;
@@ -39,6 +41,14 @@ export const getRouterData = () => {
             component:LoginPage,
             authority:'guest',
         },
+        "/dashboard/analysis":{
+          component:Analysis,
+          authority:'admin'
+        },
+        "/dashboard/monitor":{
+          component:Monitor,
+          authority:'admin'
+        }
 
 
 

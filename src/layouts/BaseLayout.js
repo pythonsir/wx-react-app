@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react'
 import DocumentTitle from 'react-document-title'
+import PropTypes from 'prop-types';
 import { Layout, Icon, message, Menu} from 'antd';
 import {Switch,Route,Redirect,HashRouter} from 'react-router-dom'
 import classNames from 'classnames';
@@ -9,10 +10,16 @@ import logo from '../assets/logo.svg';
 import styles from  './BaseLayout.less';
 import SiderMenu from '../components/SiderMenu'
 import GlobalHeader from '../components/GlobalHeader'
+import {connect} from 'react-redux'
+import Authorized from '../utils/Authorized';
+import { getRoutes } from '../utils/utils';
+
 
 
 
 const { Header, Sider, Content } = Layout;
+
+const { AuthorizedRoute } = Authorized;
 
 /**
  * 根据菜单取得重定向地址.
@@ -61,18 +68,22 @@ enquireScreen((b) => {
 
 class BasicLayout extends PureComponent{
 
+  static childContextTypes = {
+    location: PropTypes.object,
+    breadcrumbNameMap: PropTypes.object,
+  }
 
     state = {
         collapsed: false,
       };
     
-      // getChildContext() {
-      //   const { location, routerData } = this.props;
-      //   return {
-      //     location,
-      //     breadcrumbNameMap: routerData,
-      //   };
-      // }
+    getChildContext() {
+        const { location, routerData } = this.props;
+        return {
+          location,
+          breadcrumbNameMap: routerData,
+        };
+      }
     
       componentDidMount() {
         enquireScreen((mobile) => {
@@ -108,30 +119,34 @@ class BasicLayout extends PureComponent{
         
         render() {
     
-
             const bashRedirect = this.getBashRedirect();
-
+            const {
+              currentUser, collapsed, fetchingNotices, notices, routerData, match, location,
+            } = this.props;
     
           const layout = (
     
             <Layout>
              
              <SiderMenu 
+             menuData={getMenuData()}
+             location={location}
               collapsed={this.state.collapsed}
               isMobile={this.state.isMobile}  
+              Authorized={Authorized}
              />
     
             <Layout>
     
               <GlobalHeader 
     
-              collapsed={this.state.collapsed}
+              collapsed={collapsed}
               
               />
               
               <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
                  
-                 <HashRouter>
+               
                  <Switch>
 
                      {
@@ -139,9 +154,23 @@ class BasicLayout extends PureComponent{
                         <Redirect key={item.from} exact from={item.from} to={item.to} />
                         )
                      }
+                     {
+                        getRoutes(match.path, routerData).map(item =>
+                          (
+                            <AuthorizedRoute
+                              key={item.key}
+                              path={item.path}
+                              component={item.component}
+                              exact={item.exact}
+                              authority={item.authority}
+                              redirectPath="/exception/403"
+                            />
+                          )
+                        )
+                    }
                      <Redirect exact from="/" to={bashRedirect} />
                 </Switch>
-                </HashRouter>
+            
               </Content>
             </Layout>
           </Layout>
@@ -154,4 +183,8 @@ class BasicLayout extends PureComponent{
         }
 
 }
-export default BasicLayout;
+export default connect(({routerReducer})=>{
+  return {
+      location:routerReducer.location
+  }
+})(BasicLayout);

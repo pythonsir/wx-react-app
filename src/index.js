@@ -1,4 +1,5 @@
 import 'babel-polyfill'
+
 import React from 'react'
 import { render } from 'react-dom'
 import { connect, Provider } from 'react-redux'
@@ -33,7 +34,7 @@ render(
             />
         <AuthorizedRoute
               path="/"
-              render={props => <BaseLayout />}
+              render={props => <BaseLayout {...props} />}
               authority={['admin', 'user']}
               redirectPath="/user/login"
             />
