@@ -90,6 +90,10 @@ class BasicLayout extends PureComponent{
             isMobile: mobile,
           });
         });
+
+        this.props.dispatch({
+          type: 'fetchCurrent',
+        });
        
       }
 
@@ -158,7 +162,8 @@ class BasicLayout extends PureComponent{
             <Layout>
     
               <GlobalHeader 
-    
+
+              currentUser={currentUser}
               collapsed={collapsed}
               onCollapse={this.handleMenuCollapse}
               onMenuClick={this.handleMenuClick}
@@ -203,10 +208,12 @@ class BasicLayout extends PureComponent{
         }
 
 }
-export default connect(({routerReducer,global})=>{
+export default connect(({routerReducer,global,user})=>{
+
   return {
       location:routerReducer.location,
-      collapsed:global.collapsed
+      collapsed:global.collapsed,
+      currentUser:user.currentUser,
     
   }
 })(BasicLayout);

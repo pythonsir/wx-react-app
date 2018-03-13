@@ -6,12 +6,15 @@ import {
 
 import login from './login'
 import global from './global'
+import user from './user'
 
 
 const config = {
   routerReducer,
   login,
   global,
+  user,
+
 
 }
 

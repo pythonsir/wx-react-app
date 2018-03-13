@@ -28,15 +28,15 @@ function* logout({payload}){
   try {
     // get location pathname
     const urlParams = new URL(window.location.href);
-    const pathname = yield select(state => state.routing.location.pathname);
+    const pathname = yield select(state => state.routerReducer.location.pathname);
     // add the parameters in the url
     urlParams.searchParams.set('redirect', pathname);
     window.history.replaceState(null, 'login', urlParams.href);
   } finally {
     yield put({
-      type: 'commonlogin',
+      type: 'tologin',
       payload: {
-        status: false,
+        status: "",
         currentAuthority: 'guest',
       },
     });
@@ -50,6 +50,8 @@ function* logout({payload}){
  function* loginSaga() {
 
     yield takeEvery('getToken', logincheck)
+
+    yield takeEvery('logout', logout)
 
   }
 

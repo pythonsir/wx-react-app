@@ -27,6 +27,14 @@ function login(state = initstate, {type,payload}) {
     switch (type) {
       case 'commonlogin':
         return commonlogin(state,type,payload)
+      case 'tologin':
+        return {
+          ...state,
+        status:payload.status,
+        type:payload.type,
+        submitting:false,
+
+        }
       case 'mobilelogin':
 
         return state
