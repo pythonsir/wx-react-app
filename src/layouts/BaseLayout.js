@@ -72,10 +72,9 @@ class BasicLayout extends PureComponent{
     location: PropTypes.object,
     breadcrumbNameMap: PropTypes.object,
   }
-
-    state = {
-        collapsed: false,
-      };
+  state = {
+    isMobile,
+  };
     
     getChildContext() {
         const { location, routerData } = this.props;
@@ -93,11 +92,30 @@ class BasicLayout extends PureComponent{
         });
        
       }
+
+      handleMenuCollapse = (collapsed) => {
+        this.props.dispatch({
+          type: 'changeLayoutCollapsed',
+          payload: collapsed,
+        });
+      }
     
       getPageTitle() {
         
         return "主页";
     
+      }
+
+      handleMenuClick = ({ key }) => {
+        if (key === 'triggerError') {
+          //this.props.dispatch(routerRedux.push('/exception/trigger'));
+          return;
+        }
+        if (key === 'logout') {
+          this.props.dispatch({
+            type: 'logout',
+          });
+        }
       }
 
       getBashRedirect = () => {
@@ -131,9 +149,10 @@ class BasicLayout extends PureComponent{
              <SiderMenu 
              menuData={getMenuData()}
              location={location}
-              collapsed={this.state.collapsed}
+              collapsed={collapsed}
               isMobile={this.state.isMobile}  
               Authorized={Authorized}
+              onCollapse={this.handleMenuCollapse}
              />
     
             <Layout>
@@ -141,7 +160,8 @@ class BasicLayout extends PureComponent{
               <GlobalHeader 
     
               collapsed={collapsed}
-              
+              onCollapse={this.handleMenuCollapse}
+              onMenuClick={this.handleMenuClick}
               />
               
               <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
@@ -183,8 +203,10 @@ class BasicLayout extends PureComponent{
         }
 
 }
-export default connect(({routerReducer})=>{
+export default connect(({routerReducer,global})=>{
   return {
-      location:routerReducer.location
+      location:routerReducer.location,
+      collapsed:global.collapsed
+    
   }
 })(BasicLayout);
