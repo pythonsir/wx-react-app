@@ -1,4 +1,4 @@
-import { put,takeEvery,call,select } from 'redux-saga/effects'
+import { put,takeLatest,call,select } from 'redux-saga/effects'
 import { push,replace } from 'react-router-redux'
 import {login} from '../services/api'
 import { reloadAuthorized } from '../utils/Authorized';

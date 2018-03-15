@@ -1,4 +1,4 @@
-import { put,takeEvery,call,select } from 'redux-saga/effects'
+import { put,takeLatest,call,select } from 'redux-saga/effects'
 import { queryNotices } from '../services/api';
 
 function* fetchNotices(){
