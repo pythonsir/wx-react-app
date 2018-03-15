@@ -13,6 +13,7 @@ import GlobalHeader from '../components/GlobalHeader'
 import {connect} from 'react-redux'
 import Authorized from '../utils/Authorized';
 import { getRoutes } from '../utils/utils';
+import { ContainerQuery } from 'react-container-query';
 
 
 
@@ -191,7 +192,7 @@ class BasicLayout extends PureComponent{
               onNoticeClear={this.handleNoticeClear}
               />
               
-              <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
+              <Content style={{ margin: '24px 24px 0', height: '100%' }}>
                  
                
                  <Switch>
@@ -224,7 +225,9 @@ class BasicLayout extends PureComponent{
           )
           return (
           <DocumentTitle title={this.getPageTitle()}>
-            {layout}
+           <ContainerQuery query={query}>
+            {params => <div className={classNames(params)}>{layout}</div>}
+          </ContainerQuery>
           </DocumentTitle>
           );
         }

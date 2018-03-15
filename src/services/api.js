@@ -5,6 +5,8 @@ import request from '../utils/request';
 
 import  '../mock/loginMock'
 
+import {getFakeChartData} from '../mock/chart'
+
 export async function login(param) {
 
    const {username,password,type} = param;
@@ -162,4 +164,9 @@ export async function queryNotices(param){
 ];
 
 
+}
+
+export async function fakeChartData(){
+
+    return getFakeChartData;
 }

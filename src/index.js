@@ -13,6 +13,8 @@ import Authorized from './utils/Authorized';
 
 import 'ant-design-pro/dist/ant-design-pro.css'; 
 
+import './index.css'; 
+
 
 const { AuthorizedRoute } = Authorized;
 
