@@ -16,6 +16,14 @@ function user(state = initstate,{type,payload}){
                 ...state,
                 currentUser:payload.$body
             }
+        case 'changeNotifyCount':
+        return {
+            ...state,
+            currentUser: {
+              ...state.currentUser,
+              notifyCount: payload,
+            },
+          };
         default:
             return state
     }

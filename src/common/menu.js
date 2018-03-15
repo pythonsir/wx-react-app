@@ -25,9 +25,11 @@ const menuData = [
   children: [{
     name: '登录',
     path: 'login',
+    authority:'guest'
   }, {
     name: '注册',
     path: 'register',
+    authority:'guest'
   }, {
     name: '注册结果',
     path: 'register-result',

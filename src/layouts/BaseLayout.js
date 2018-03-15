@@ -94,6 +94,8 @@ class BasicLayout extends PureComponent{
         this.props.dispatch({
           type: 'fetchCurrent',
         });
+        
+       
        
       }
 
@@ -118,6 +120,14 @@ class BasicLayout extends PureComponent{
         if (key === 'logout') {
           this.props.dispatch({
             type: 'logout',
+          });
+        }
+      }
+
+      handleNoticeVisibleChange = (visible) => {
+        if (visible) {
+          this.props.dispatch({
+            type: 'fetchNotices',
           });
         }
       }
@@ -161,12 +171,15 @@ class BasicLayout extends PureComponent{
     
             <Layout>
     
-              <GlobalHeader 
+              <GlobalHeader
 
+              fetchingNotices={fetchingNotices}
+              notices={notices}
               currentUser={currentUser}
               collapsed={collapsed}
               onCollapse={this.handleMenuCollapse}
               onMenuClick={this.handleMenuClick}
+              onNoticeVisibleChange={this.handleNoticeVisibleChange}
               />
               
               <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
@@ -214,6 +227,7 @@ export default connect(({routerReducer,global,user})=>{
       location:routerReducer.location,
       collapsed:global.collapsed,
       currentUser:user.currentUser,
-    
+      fetchingNotices:global.fetchingNotices,
+      notices:global.notices,
   }
 })(BasicLayout);
