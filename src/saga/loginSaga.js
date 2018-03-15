@@ -49,9 +49,9 @@ function* logout({payload}){
 
  function* loginSaga() {
 
-    yield takeEvery('getToken', logincheck)
+    yield takeLatest('getToken', logincheck)
 
-    yield takeEvery('logout', logout)
+    yield takeLatest('logout', logout)
 
   }
 

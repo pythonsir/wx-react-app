@@ -34,9 +34,9 @@ function* clearNotices({payload}){
 
 function* global() {
 
-    yield takeEvery('fetchNotices', fetchNotices)
+    yield takeLatest('fetchNotices', fetchNotices)
 
-    yield takeEvery('clearNotices', clearNotices)
+    yield takeLatest('clearNotices', clearNotices)
    
   }
 

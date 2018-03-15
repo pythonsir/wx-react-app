@@ -18,7 +18,7 @@ function* getCurrent(){
 
 function* userSaga() {
 
-    yield takeEvery('fetchCurrent', getCurrent)
+    yield takeLatest('fetchCurrent', getCurrent)
    
   }
 
