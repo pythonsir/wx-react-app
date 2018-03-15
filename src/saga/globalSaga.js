@@ -22,9 +22,21 @@ function* fetchNotices(){
 
 }
 
+function* clearNotices({payload}){
+
+  yield put({
+    type: 'saveClearedNotices',
+    payload,
+  });
+
+
+}
+
 function* global() {
 
     yield takeEvery('fetchNotices', fetchNotices)
+
+    yield takeEvery('clearNotices', clearNotices)
    
   }
 

@@ -124,6 +124,14 @@ class BasicLayout extends PureComponent{
         }
       }
 
+      handleNoticeClear = (type) => {
+        message.success(`清空了${type}`);
+        this.props.dispatch({
+          type: 'clearNotices',
+          payload: type,
+        });
+      }
+
       handleNoticeVisibleChange = (visible) => {
         if (visible) {
           this.props.dispatch({
@@ -180,6 +188,7 @@ class BasicLayout extends PureComponent{
               onCollapse={this.handleMenuCollapse}
               onMenuClick={this.handleMenuClick}
               onNoticeVisibleChange={this.handleNoticeVisibleChange}
+              onNoticeClear={this.handleNoticeClear}
               />
               
               <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>

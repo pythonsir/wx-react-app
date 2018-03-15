@@ -29,6 +29,11 @@ function global(state = initstate, {type,payload}){
             ...state,
             fetchingNotices:false
           }
+        case 'saveClearedNotices':
+          return {
+            ...state,
+            notices: state.notices.filter(item => item.type !== payload),
+          }
         default:
         return state
     }
