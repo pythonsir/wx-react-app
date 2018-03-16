@@ -87,7 +87,7 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "build": "set NODE_ENV=production&&node scripts/build.js",
     "test": "rnode scripts/test.js --env=jsdom"
   },
   "jest": {
