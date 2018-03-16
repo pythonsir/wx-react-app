@@ -149,9 +149,54 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
+              babelrc:true,
+              presets: [require.resolve('babel-preset-react-app')],
+              // This is a feature of `babel-loader` for webpack (not Babel itself).
+              // It enables caching results in ./node_modules/.cache/babel-loader/
+              // directory for faster rebuilds.
+              cacheDirectory: true,
               compact: true,
             },
+          },
+          {
+            test:/\.less$/,
+            use:[
+              require.resolve('style-loader'),
+              {
+                loader:require.resolve('css-loader'),
+                options:{
+                  modules: true,
+                  localIdentName:'[local]__[hash:base64:5]'
+                }
+              },
+              require.resolve('less-loader'),
+            ]
+          },
+          {
+            test: /\.css$/,
+            include:/(node_modules|antd|antd-mobile)/,
+            use:[
+              require.resolve('style-loader'),
+              require.resolve('css-loader'),
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  ident: 'postcss',
+                  plugins: () => [
+                    require('postcss-flexbugs-fixes'),
+                    autoprefixer({
+                      browsers: [
+                        '>1%',
+                        'last 4 versions',
+                        'Firefox ESR',
+                        'not ie < 9', // React doesn't support IE8 anyway
+                      ],
+                      flexbox: 'no-2009',
+                    }),
+                  ],
+                },
+              },
+            ]
           },
           // The notation here is somewhat confusing.
           // "postcss" loader applies autoprefixer to our CSS.
@@ -167,6 +212,7 @@ module.exports = {
           // in the main CSS file.
           {
             test: /\.css$/,
+            include: path.appSrc,
             loader: ExtractTextPlugin.extract(
               Object.assign(
                 {
@@ -180,9 +226,11 @@ module.exports = {
                     {
                       loader: require.resolve('css-loader'),
                       options: {
+                        modules: true,
                         importLoaders: 1,
                         minimize: true,
                         sourceMap: shouldUseSourceMap,
+                        localIdentName: '[local]___[hash:base64:5]',
                       },
                     },
                     {
