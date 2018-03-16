@@ -16,7 +16,7 @@
 
 ## 效果gif
 
-![](http://image.manzj.net/Untitled.gif)
+![](https://github.com/pythonsir/wx-react-app/blob/master/src/Untitled.gif)
 
 ## 项目结构
 
