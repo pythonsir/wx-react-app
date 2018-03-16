@@ -16,6 +16,7 @@
 
 ## 效果gif
 
+![](http://image.manzj.net/Untitled.gif)
 
 ## 项目结构
 
@@ -31,13 +32,13 @@
   - webpackDevServer.config.js 
 - public
   - favicon.ico
-  - index.html               主页面
+  - index.html               主页面
   - mainifest.json
 - scripts                    脚本文件夹
   - build.js
   - start.js
   - test.js
-- src                        源码文件夹
+- src                        源码文件夹
   - assets                   资源文件夹
   - common
     - menu.js                菜单配置文件
@@ -57,7 +58,7 @@
   - routes                   容器组件文件夹
     ......
   - saga                     
-    - index.js               异步redux的入口
+    - index.js               异步redux的入口
     ......
   - services
     - api.js                 请求入口
