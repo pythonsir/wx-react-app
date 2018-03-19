@@ -143,21 +143,22 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              babelrc:true,
+              babelrc: true,
               presets: [require.resolve('babel-preset-react-app')],
               // This is a feature of `babel-loader` for webpack (not Babel itself).
               // It enables caching results in ./node_modules/.cache/babel-loader/
               // directory for faster rebuilds.
+              plugins: [
+                "transform-decorators-legacy",
+                ["import",
+                  {
+                    "libraryName": "antd",
+                    "style": "css",
+                  }
+                ]
+              ],
               cacheDirectory: true,
             },
-            // query:{
-            //   plugins: [["import", 
-            //   {
-            //     "libraryName": "antd-mobile",
-            //     "style":"css",
-            //   },
-            // ]]
-            // }
           },
           {
             test:/\.less$/,

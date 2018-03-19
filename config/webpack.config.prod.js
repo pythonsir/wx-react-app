@@ -156,6 +156,15 @@ module.exports = {
               // directory for faster rebuilds.
               cacheDirectory: true,
               compact: true,
+              plugins: [
+               "transform-decorators-legacy",
+                ["import",
+                  {
+                    "libraryName": "antd",
+                    "style": "css",
+                  }
+                ]
+              ],
             },
           },
           {
