@@ -14,30 +14,6 @@
 
 2、作为一名服务器端开发人员也想了解一下前端的一些框架以及技术，坚信只有通过自己搭建才能够了解使用技术的核心用法。
 
-## 关于装饰器@
-
-由于 Ant Design Pro 里面用到了装饰器，所以这里说一下 Create-React-App 如何支持装饰器？
-
-首先安装 `babel-plugin-transform-decorators-legacy`
-
-`yarn add babel-plugin-transform-decorators-legacy -D`
-
-其次找到 `node_modules/babel-preset-react-app/index.js` ,加入装饰器支持
-
-```
-
-'use strict';
-
-const plugins = [
-  // 增加装饰器的支持
- + require.resolve('babel-plugin-transform-decorators-legacy'), 
-  // class { handleClick = () => { } }
-  require.resolve('babel-plugin-transform-class-properties')
-  ....
-
-```
-如果有其他的好的方法，请告知，万分感谢！
-
 
 ## 效果gif
 
