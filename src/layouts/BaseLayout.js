@@ -16,6 +16,9 @@ import { getRoutes } from '../utils/utils';
 import { ContainerQuery } from 'react-container-query';
 
 
+import UserList from '../routes/user/list'
+
+import UserAdd from '../routes/user/add'
 
 
 const { Header, Sider, Content } = Layout;
@@ -160,7 +163,6 @@ class BasicLayout extends PureComponent{
         
         render() {
     
-            const bashRedirect = this.getBashRedirect();
             const {
               currentUser, collapsed, fetchingNotices, notices, routerData, match, location,
             } = this.props;
@@ -202,6 +204,7 @@ class BasicLayout extends PureComponent{
                         <Redirect key={item.from} exact from={item.from} to={item.to} />
                         )
                      }
+                     
                      {
                         getRoutes(match.path, routerData).map(item =>
                           (
@@ -216,7 +219,7 @@ class BasicLayout extends PureComponent{
                           )
                         )
                     }
-                     <Redirect exact from="/" to={bashRedirect} />
+                     <Redirect exact from="/" to="/dashboard/analysis" />
                 </Switch>
             
               </Content>

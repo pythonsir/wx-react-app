@@ -8,8 +8,9 @@ import BasicLayout from '../layouts/BaseLayout'
 import User from '../routes/user/index'
 import UserLayout from '../layouts/UserLayout'
 import Analysis  from '../routes/Dashboard/Analysis'
-import Monitor  from '../routes/Dashboard/Monitor'
-
+import UserManager from '../routes/user'
+import UserList from '../routes/user/list'
+import UserAdd from '../routes/user/add'
 
 let routerDataCache;
 
@@ -45,13 +46,19 @@ export const getRouterData = () => {
           component:Analysis,
           authority:'admin'
         },
-        "/dashboard/monitor":{
-          component:Monitor,
+        "/syster/user":{
+          component:UserManager,
           authority:'admin'
-        }
-
-
-
+        },
+        "/syster/user/list":{
+          component:UserList,
+          authority:'admin'
+        },
+        "/syster/user/add":{
+          component:UserAdd,
+          authority:'admin'
+        },
+     
     }
      
        
