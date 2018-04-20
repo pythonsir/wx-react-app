@@ -7,6 +7,8 @@ import store ,{history} from './store'
 import { ConnectedRouter } from 'react-router-redux'
 import { Route, Switch } from 'react-router-dom'
 
+
+
 import { getRouterData } from './common/router';
 
 import Authorized from './utils/Authorized';
@@ -15,6 +17,9 @@ import 'ant-design-pro/dist/ant-design-pro.css';
 
 import './index.css'; 
 
+import { LocaleProvider } from 'antd';
+import zh_CN from 'antd/lib/locale-provider/zh_CN';
+import 'moment/locale/zh-cn';
 
 const { AuthorizedRoute } = Authorized;
 
@@ -29,6 +34,7 @@ const UserLayout = routerData['/user'].component;
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
+    <LocaleProvider locale={zh_CN}>
       <Switch>
         <Route 
               path="/user"
@@ -41,6 +47,7 @@ render(
               redirectPath="/user/login"
             />
       </Switch>
+      </LocaleProvider>
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
