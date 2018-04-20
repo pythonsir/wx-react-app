@@ -22,22 +22,10 @@
 
 ```
 - build                      打包后的项目目录
-- config                     webpack配置文件夹
-  - jest
-  - env.js
-  - paths.js
-  - polyfills.js
-  - webpack.config.dev.js    开发环境配置文件
-  - webpack.config.prod.js   生产环境配置文件
-  - webpackDevServer.config.js 
 - public
   - favicon.ico
   - index.html               主页面
   - mainifest.json
-- scripts                    脚本文件夹
-  - build.js
-  - start.js
-  - test.js
 - src                        源码文件夹
   - assets                   资源文件夹
   - common
@@ -68,7 +56,8 @@
     .....
   index.js
   index.css
-  ......
+- config-overrides.js        webpack配置文件
+......
 ```
 
 
