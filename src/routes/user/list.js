@@ -1,7 +1,7 @@
 import React,{PureComponent,Fragment} from 'react'
 import {connect} from 'react-redux'
-import { Row, Col, Card, Form, Input, Select, Icon, Button, Dropdown, Menu, InputNumber, DatePicker, Modal, message, Badge, Divider } from 'antd';
 import styles from './index.less'
+import { Row, Col, Card, Form, Input, Select, Icon, Button, Dropdown, Menu, InputNumber, DatePicker, Modal, message, Badge, Divider } from 'antd';
 import moment from 'moment';
 
 const FormItem = Form.Item;
@@ -110,6 +110,13 @@ const CreateForm = Form.create()((props) => {
 class UserList extends PureComponent{
 
 
+    state = {
+      modalVisible: false,
+      expandForm: false,
+      selectedRows: [],
+      formValues: {},
+    };
+
     componentDidMount(){
 
         this.props.changetitle("用户管理")
@@ -195,7 +202,7 @@ class UserList extends PureComponent{
 
                        <div className={styles.tableList}>
                             <div className={styles.tableListForm}>
-                            {}
+                            {this.renderAdvancedForm()}
                             </div>
                             <div className={styles.tableListOperator}>
                                 <Button icon="plus" type="primary" >

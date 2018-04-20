@@ -16,6 +16,8 @@ import { getRoutes } from '../utils/utils';
 import { ContainerQuery } from 'react-container-query';
 
 
+
+
 import UserList from '../routes/user/list'
 
 import UserAdd from '../routes/user/add'
@@ -227,6 +229,7 @@ class BasicLayout extends PureComponent{
           </Layout>
           )
           return (
+            
           <DocumentTitle title={this.getPageTitle()}>
            <ContainerQuery query={query}>
             {params => <div className={classNames(params)}>{layout}</div>}

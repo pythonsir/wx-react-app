@@ -26,7 +26,12 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          require.resolve('style-loader'),
+          {
+            loader: require.resolve('style-loader'),
+            options: {
+              singleton: true
+            }
+          },
           require.resolve('css-loader'),
           {
             loader: require.resolve('postcss-loader'),
@@ -64,12 +69,16 @@ module.exports = {
         test: /\.less$/,
         exclude: /node_modules|antd/,
         use: [
-          require.resolve('style-loader'),
+          {
+            loader: require.resolve('style-loader'),
+            options: {
+              singleton: true
+            }
+          },
           {
               loader: require.resolve('css-loader'),
               options: {
                 modules: true,
-                importLoaders: 1,
                 localIdentName: '[local]___[hash:base64:5]'
               },
             },
@@ -110,12 +119,16 @@ module.exports = {
         test: /\.css$/,
         exclude: /node_modules|antd\.css/,
         use: [
-          require.resolve('style-loader'),
+          {
+            loader: require.resolve('style-loader'),
+            options: {
+              singleton: true
+            }
+          },
           {
             loader: require.resolve('css-loader'),
             options: {
               modules: true,
-              importLoaders: 1,
               localIdentName: '[local]___[hash:base64:5]'
             },
           },
