@@ -1,12 +1,11 @@
 import { put,takeLatest,call,select } from 'redux-saga/effects'
-import {getCurrent as gCurrent} from '../services/api'
+import {getCurrent as gCurrent,getuserlist} from '../services/api'
 
 
 function* getCurrent(){
 
     const response = yield call(gCurrent);
 
-    console.log(response)
 
     yield put({
         type: 'saveCurrentUser',
@@ -16,9 +15,26 @@ function* getCurrent(){
 
 }
 
+function* getUserList(){
+
+    const response = yield call(getuserlist) 
+
+    yield put({
+        type:'userList',
+        payload:response.users,
+
+    })
+
+
+
+}
+
 function* userSaga() {
 
     yield takeLatest('fetchCurrent', getCurrent)
+
+    yield takeLatest('getuserlist', getUserList)
+
    
   }
 

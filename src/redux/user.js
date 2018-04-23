@@ -24,6 +24,13 @@ function user(state = initstate,{type,payload}){
               notifyCount: payload,
             },
           };
+        case 'userList':
+
+            return {
+                ...state,
+                list:payload,
+            }  
+
         default:
             return state
     }

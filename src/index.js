@@ -18,7 +18,9 @@ import 'ant-design-pro/dist/ant-design-pro.css';
 import './index.css'; 
 
 import { LocaleProvider } from 'antd';
+
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
+
 import 'moment/locale/zh-cn';
 
 const { AuthorizedRoute } = Authorized;

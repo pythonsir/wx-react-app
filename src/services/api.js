@@ -7,6 +7,19 @@ import  '../mock/loginMock'
 
 import {getFakeChartData} from '../mock/chart'
 
+import  '../mock/userdata'
+
+
+export async function getuserlist(){
+
+  return axios.get('/api/userdata').then(function(response){
+
+    return response.data;
+
+  })
+
+}
+
 export async function login(param) {
 
    const {username,password,type} = param;
