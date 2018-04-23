@@ -1,5 +1,6 @@
 const initstate = {
     list: [],
+    listloading:true,
     currentUser: {},
 }
 
@@ -24,6 +25,11 @@ function user(state = initstate,{type,payload}){
               notifyCount: payload,
             },
           };
+        case 'listload':
+          return {
+              ...state,
+            listloading:payload,
+          }
         case 'userList':
 
             return {

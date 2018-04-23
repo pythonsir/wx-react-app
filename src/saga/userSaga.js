@@ -17,13 +17,20 @@ function* getCurrent(){
 
 function* getUserList(){
 
-    const response = yield call(getuserlist) 
-
+    const response = yield call(getuserlist)
+    
+  
     yield put({
         type:'userList',
         payload:response.users,
 
     })
+
+    yield put({
+        type:'listload',
+        payload:false,
+    })
+
 
 
 

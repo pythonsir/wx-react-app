@@ -6,8 +6,8 @@ const userdata = Mock.mock('/api/userdata',{
         "account|+1":10000,
         "name":'@cname',
         "status|1":[
-            "启用",
-            "禁用",
+            1,
+            0,
         ],
         "createdate":"@datetime()",
         }
