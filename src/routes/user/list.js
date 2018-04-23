@@ -58,7 +58,6 @@ const columns = [
 ];
 
 
-const CreateForm = Form.create({});
   
 
 
@@ -161,7 +160,9 @@ class UserList extends PureComponent{
                             {this.renderAdvancedForm()}
                             </div>
                             <div className={styles.tableListOperator}>
-                                <Button icon="plus" type="primary" >
+                                <Button icon="plus" type="primary" onClick={()=>(
+                                  history.push("/syster/user/add")
+                                )}>
                                     新建
                                 </Button>
                         
