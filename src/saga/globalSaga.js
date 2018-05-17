@@ -1,5 +1,15 @@
 import { put,takeLatest,call,select } from 'redux-saga/effects'
-import { queryNotices } from '../services/api';
+import { queryNotices,getservercsrf } from '../services/api';
+
+
+function* getcsrf(){
+
+  const csrf = yield call(getservercsrf);
+
+  localStorage.setItem('apicsrf',csrf.apicsrf);
+
+}
+
 
 function* fetchNotices(){
 
@@ -33,6 +43,8 @@ function* clearNotices({payload}){
 }
 
 function* global() {
+
+    yield takeLatest('getcsrf', getcsrf)
 
     yield takeLatest('fetchNotices', fetchNotices)
 

@@ -7,14 +7,18 @@ import { reloadAuthorized } from '../utils/Authorized';
 
   const response = yield call(login, payload);
 
+  
+
   yield put({
     type:'commonlogin',
     payload:{
       ...response,
+      type:payload.type,
+      currentAuthority:'admin',
     },
   })
 
-  if(response.status === 'ok'){
+  if(response.status === 200){
 
     reloadAuthorized();
 

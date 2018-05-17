@@ -21,6 +21,26 @@ const Option = Select.Option;
 
     }
 
+    handleSubmit =(e) =>{
+
+        e.preventDefault();
+
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+
+                this.props.dispatch({
+                    type:'addUser',
+                    payload:values
+                })
+
+            }
+          });
+
+
+
+
+    }
+
     render(){
 
         const { getFieldDecorator } = this.props.form;
@@ -47,10 +67,10 @@ const Option = Select.Option;
 
         return(
             <Card bordered={false}>
-                <Form layout="horizontal">
+                <Form  onSubmit={this.handleSubmit} layout="horizontal">
 
                     <FormItem {...formItemLayout} label="账号">
-                    {getFieldDecorator('account', {
+                    {getFieldDecorator('user_name', {
                             rules: [{
                             required: true, message: '请输入账号',
                             }],
@@ -60,19 +80,9 @@ const Option = Select.Option;
 
 
                     </FormItem>
-                    <FormItem {...formItemLayout} label="姓名">
-                    {getFieldDecorator('name', {
-                            rules: [{
-                            required: true, message: '请输入姓名',
-                            }],
-                        })(
-                            <Input placeholder="请输入姓名" />
-                      )}
-
-
-                    </FormItem>
+                
                     <FormItem {...formItemLayout} label="状态">
-                    {getFieldDecorator('state', {
+                    {getFieldDecorator('status', {
                             rules: [{
                             required: true, message: '请输入账号',
                             }],

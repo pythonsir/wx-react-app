@@ -10,6 +10,12 @@ import {getFakeChartData} from '../mock/chart'
 import  '../mock/userdata'
 
 
+export async function getservercsrf(){
+
+  return request('csrf/index');
+
+}
+
 export async function getuserlist(){
 
   return axios.get('/api/userdata').then(function(response){
@@ -22,38 +28,44 @@ export async function getuserlist(){
 
 export async function login(param) {
 
-   const {username,password,type} = param;
+   const {username,password,type,autoLogin} = param;
 
+  
 
-    return axios.get('/api/login').then(function(response){
+    return request('site/login?XDEBUG_SESSION_START=19284',{
+      data:{
+        'username':username,
+        'password':password,
+        'rememberMe':autoLogin,
+      },
+      method:'POST',
+   }).then((data)=>{
 
+      localStorage.setItem("access_toke",data.access_token);
 
-        if(username === 'admin' && password === '888888'){
-            
-            return {
-                status:'ok',
-                type:type,
-                currentAuthority:'admin'
-            };
-           
-          }else if(password === '123456' && username === 'user'){
+      return data;
 
-            return {
-                status: 'ok',
-                type,
-                currentAuthority: 'user'
-            }
-         
-          }else{
-
-            return {
-                status:'error',
-                type:type,
-            }
-            
-          }
-    
-        })
+   })
+    // return axios.get('/api/login').then(function(response){
+    //     if(username === 'admin' && password === '888888'){
+    //         return {
+    //             status:'ok',
+    //             type:type,
+    //             currentAuthority:'admin'
+    //         };
+    //       }else if(password === '123456' && username === 'user'){
+    //         return {
+    //             status: 'ok',
+    //             type,
+    //             currentAuthority: 'user'
+    //         }
+    //       }else{
+    //         return {
+    //             status:'error',
+    //             type:type,
+    //         }
+    //       }
+    //     })
 }
 
 export async function getCurrent(param){

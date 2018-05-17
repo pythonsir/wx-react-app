@@ -2,7 +2,7 @@ import { notification } from 'antd';
 import axios from 'axios'
 import store from '../store'
 import {push} from 'react-router-redux'
-
+import Config from '../common/config'
 
 const codeMessage = {
     200: '服务器成功返回请求的数据',
@@ -60,13 +60,13 @@ export default function request(url, options) {
       newOptions.body = JSON.stringify(newOptions.body);
     }
   
-    return axios(url, newOptions)
+    return axios(Config.host+url, newOptions)
       .then(checkStatus)
       .then((response) => {
         if (newOptions.method === 'DELETE' || response.status === 204) {
           return response.text();
         }
-        return response.json();
+        return response.data;
       })
       .catch((e) => {
         const { dispatch } = store;

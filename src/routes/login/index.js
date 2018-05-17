@@ -24,6 +24,14 @@ class LoginPage extends Component{
     autoLogin: true,
   }
 
+  componentDidMount(){
+
+    this.props.dispatch({
+      type:'getcsrf'
+    })
+
+
+  }
 
 
   onTabChange = (key) => {
@@ -50,6 +58,7 @@ class LoginPage extends Component{
               payload:{
                 ...values,
                 type,
+                autoLogin:this.state.autoLogin
               }
   
             })
@@ -83,8 +92,8 @@ class LoginPage extends Component{
                 login.type === 'account' &&
                 <Alert style={{ marginBottom: 24 }} message={'账号密码错误'} type="error" showIcon closable />
               }
-              <UserName name="username" placeholder="admin/user"  />
-              <Password name="password" placeholder="888888/123456" />
+              <UserName name="username" placeholder="请输入账号"  />
+              <Password name="password" placeholder="请输入密码" />
             </Tab>
             <Tab key="mobile" tab="手机号登录">
             {
