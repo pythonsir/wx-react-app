@@ -88,7 +88,7 @@ class LoginPage extends Component{
           >
             <Tab key="account" tab="账号密码登录">
               {
-                login.status === 'error' &&
+                login.status === 401 &&
                 login.type === 'account' &&
                 <Alert style={{ marginBottom: 24 }} message={'账号密码错误'} type="error" showIcon closable />
               }
@@ -97,7 +97,7 @@ class LoginPage extends Component{
             </Tab>
             <Tab key="mobile" tab="手机号登录">
             {
-                login.status === 'error' &&
+                login.status === 401 &&
                 login.type === 'mobile' &&
                 <Alert style={{ marginBottom: 24 }} message={'账号密码错误'} type="error" showIcon closable />
               }

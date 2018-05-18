@@ -8,6 +8,7 @@ import login from './login'
 import global from './global'
 import user from './user'
 import chart from './chart'
+import useradd from './useradd'
 
 const config = {
   routerReducer,
@@ -15,6 +16,7 @@ const config = {
   global,
   user,
   chart,
+  useradd,
 
 
 }

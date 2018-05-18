@@ -16,7 +16,7 @@ function commonlogin(state,type,payload){
     ...state,
     status:payload.status,
     type:payload.type,
-    submitting:payload.status == 'error'?false:true,
+    submitting:payload.status == '401'?false:true,
   }
 
 }

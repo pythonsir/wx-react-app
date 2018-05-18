@@ -45,7 +45,7 @@ render(
         <AuthorizedRoute
               path="/"
               render={props => <BaseLayout {...props} />}
-              authority={['admin', 'user']}
+              authority={['admin']}
               redirectPath="/user/login"
             />
       </Switch>

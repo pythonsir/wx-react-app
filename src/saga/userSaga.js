@@ -1,4 +1,5 @@
 import { put,takeLatest,call,select } from 'redux-saga/effects'
+import { push,replace } from 'react-router-redux'
 import {getCurrent as gCurrent,getuserlist} from '../services/api'
 import {_addUser} from '../services/user'
 
@@ -40,7 +41,17 @@ function* addUser({payload}){
 
     const response = yield call(_addUser,payload);
 
-    console.log(response)
+    yield put({
+        type:'useradd/result',
+        payload:response,
+    })
+
+    if(response.status === 200){
+
+        yield put(push("/syster/user/list"))
+
+
+    }
 
 }
 

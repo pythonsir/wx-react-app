@@ -1,5 +1,5 @@
 import React,{PureComponent} from 'react'
-import {Card,Form,Input,Select,Button} from 'antd'
+import {Card,Form,Input,Select,Button,Tooltip,Icon,message} from 'antd'
 import {connect} from 'react-redux'
 
 /**
@@ -14,12 +14,16 @@ const Option = Select.Option;
  class UserAdd extends PureComponent{
 
 
+    state={
+        password:'123456'
+    }
+
     componentDidMount(){
 
         this.props.changetitle("用户管理—添加")
-
-
     }
+
+   
 
     handleSubmit =(e) =>{
 
@@ -27,6 +31,10 @@ const Option = Select.Option;
 
         this.props.form.validateFields((err, values) => {
             if (!err) {
+
+                this.props.dispatch({
+                    type:'startsave'
+                })
 
                 this.props.dispatch({
                     type:'addUser',
@@ -63,6 +71,11 @@ const Option = Select.Option;
               sm: { span: 10, offset: 7 },
             },
           };
+
+          const mesg = ()=>{
+
+          }
+          
       
 
         return(
@@ -80,6 +93,27 @@ const Option = Select.Option;
 
 
                     </FormItem>
+
+                    <FormItem {...formItemLayout} label={(
+            <span>
+              密码&nbsp;
+              <Tooltip title="默认密码：123456">
+                <Icon type="question-circle-o" />
+              </Tooltip>
+            </span>
+          )} >
+                    {getFieldDecorator('password', {
+                            rules: [{
+                            required: true, message: '请输入密码',
+                            }],
+                            initialValue:this.state.password,
+                        })(
+                            <Input  type="password"/>
+                      )}
+
+
+                    </FormItem>
+                
                 
                     <FormItem {...formItemLayout} label="状态">
                     {getFieldDecorator('status', {
@@ -98,10 +132,10 @@ const Option = Select.Option;
                     </FormItem>
 
                     <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
-                        <Button type="primary" htmlType="submit" >
+                        <Button type="primary" htmlType="submit" loading={this.props.saveloading} >
                             提交
                         </Button>
-                        <Button style={{ marginLeft: 8 }}>保存</Button>
+                        <Button style={{ marginLeft: 8 }}>清空</Button>
                     </FormItem>
 
 
@@ -115,8 +149,8 @@ const Option = Select.Option;
 
 }
 
-export default connect ((state)=>(
-    {
-        state
-    }
+export default connect (({useradd})=>(
+    
+        useradd
+   
 ))(UserAdd)
