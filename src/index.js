@@ -5,7 +5,7 @@ import { render } from 'react-dom'
 import { connect, Provider } from 'react-redux'
 import store ,{history} from './store'
 import { ConnectedRouter } from 'react-router-redux'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch,HashRouter } from 'react-router-dom'
 
 
 
@@ -37,6 +37,7 @@ render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
     <LocaleProvider locale={zh_CN}>
+    <HashRouter>
       <Switch>
         <Route 
               path="/user"
@@ -49,6 +50,7 @@ render(
               redirectPath="/user/login"
             />
       </Switch>
+      </HashRouter>
       </LocaleProvider>
     </ConnectedRouter>
   </Provider>,
