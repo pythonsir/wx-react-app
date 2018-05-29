@@ -18,6 +18,13 @@
 
 ![](https://github.com/pythonsir/wx-react-app/blob/master/src/Untitled.gif)
 
+## 版本说明
+wx-react-app 在 v0.3.0 之后加入了接口服务。  
+
+开源项目 [wx-react-service](https://github.com/pythonsir/wx-react-app/blob/master/src/Untitled.gif) 为其提供接口服务支持。  
+
+wx-react-app 在 v0.3.0 之前还是采用 mock.js模拟数据
+
 ## 项目结构
 
 ```
